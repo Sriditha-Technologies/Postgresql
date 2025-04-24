@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <title>
+            <title>Flask PostgreSQL App</title>
+            <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+            <link rel="stylesheet" href="{{url_for('static',filename='myfont/css/all.min.css')}}">
+            <script src="{{url_for('static',filename='js/jquery.min.js')}}"></script>
+        </title>
+    </head>
+    <body>
+        <h1 style="color:brown;text-align: center">Trinity Academy Courses</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Course Name</th>
+                    <th>Fees</th>
+                    <th>Duration</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                   <tr>
+                    <td>{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                    <td>{{roe[2]}}</td>
+                    <td>{{row[3]}}</td>
+                   </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h2>Add a New Course</h2>
+        <form action="/Create" method="post">
+           <input type="text" name="name" placeholder="Name">
+           <input type="text" name="fees" placeholder="Fees">
+           <input type="text" name="duration" placeholder="Duration">
+           <input type="submit" value="Create">
+        </form>
+        <h2>Update/Delete Course Details</h2>
+        <table>
+            <thead style="display:block">
+                <tr>
+                    <th>ID</th>
+                    <th with="35">Course Name</th>
+                    <th with="35">Fees</th>
+                    <th with="15">Duration</th>
+                    <th with="15">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                    <tr>
+                       <td>
+                           <form action="/Update" method="POST">
+                               <label>{{row[0]}}</label>
+                               <input type="hidden" name="id" value="{{row[0]}}">
+                               <input type="text" name="name" size="15" value="{{row[1]}}">
+                               <input type="text" name="fees" size="7" value="{{row[2]}}">
+                               <input type="text" name="duration" size="3" value="{{row[3]}}">
+                               <input type="submit" value="Update">
+                           </form>
+                       </td>
+                       <td>
+                           <form action="/Delete" method="POST">
+                               <input type="hidden" name="id" value="{{row[0]}}">
+                               <input type="Submit" value="Delete">
+                           </form>
+                       </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
