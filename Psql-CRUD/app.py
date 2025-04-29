@@ -30,7 +30,7 @@ def create():
     return redirect(url_for('index'))
 
 @app.route('/update',methods=['POST'])
-def create():
+def update():
     conn=db_conn()
     cur=conn.cursor()
     name=request.form['name']
@@ -41,7 +41,7 @@ def create():
     conn.commit()
     return redirect(url_for('index'))
 
-@app.route('/delete',method=['POST'])
+@app.route('/delete',methods=['POST'])
 def delete():
     conn=db_conn()
     cur=conn.cursor()
